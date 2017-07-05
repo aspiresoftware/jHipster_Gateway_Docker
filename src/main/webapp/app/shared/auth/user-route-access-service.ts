@@ -15,12 +15,17 @@ export class UserRouteAccessService implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Promise<boolean> {
-
         const authorities = route.data['authorities'];
         if (!authorities || authorities.length === 0) {
-            return true;
+            const principal = this.principal;
+            return Promise.resolve(principal.identity().then((account) => {
+                if (!account) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }));
         }
-
         return this.checkLogin(authorities, state.url);
     }
 
@@ -36,7 +41,8 @@ export class UserRouteAccessService implements CanActivate {
             this.router.navigate(['accessdenied']).then(() => {
                 // only show the login dialog, if the user hasn't logged in yet
                 if (!account) {
-                    this.loginModalService.open();
+                    // this.loginModalService.open();
+                    this.router.navigate(['/']);
                 }
             });
             return false;

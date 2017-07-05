@@ -1,5 +1,5 @@
 import { Component, AfterViewInit, Renderer, ElementRef } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { EventManager } from 'ng-jhipster';
 
@@ -24,7 +24,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
         private elementRef: ElementRef,
         private renderer: Renderer,
         private router: Router,
-        public activeModal: NgbActiveModal
+        // public activeModal: NgbActiveModal
     ) {
         this.credentials = {};
     }
@@ -40,7 +40,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
             rememberMe: true
         };
         this.authenticationError = false;
-        this.activeModal.dismiss('cancel');
+        // this.activeModal.dismiss('cancel');
     }
 
     login() {
@@ -50,10 +50,10 @@ export class JhiLoginModalComponent implements AfterViewInit {
             rememberMe: this.rememberMe
         }).then(() => {
             this.authenticationError = false;
-            this.activeModal.dismiss('login success');
+            // this.activeModal.dismiss('login success');
             if (this.router.url === '/register' || (/activate/.test(this.router.url)) ||
                 this.router.url === '/finishReset' || this.router.url === '/requestReset') {
-                this.router.navigate(['']);
+                this.router.navigate(['/']);
             }
 
             this.eventManager.broadcast({
@@ -63,22 +63,22 @@ export class JhiLoginModalComponent implements AfterViewInit {
 
             // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
             // // since login is succesful, go to stored previousState and clear previousState
-            const redirect = this.stateStorageService.getUrl();
-            if (redirect) {
-                this.router.navigate([redirect]);
-            }
+            // const redirect = this.stateStorageService.getUrl();
+            // if (redirect) {
+                this.router.navigate(['/home']);
+            // }
         }).catch(() => {
             this.authenticationError = true;
         });
     }
 
     register() {
-        this.activeModal.dismiss('to state register');
+        // this.activeModal.dismiss('to state register');
         this.router.navigate(['/register']);
     }
 
     requestResetPassword() {
-        this.activeModal.dismiss('to state requestReset');
+        // this.activeModal.dismiss('to state requestReset');
         this.router.navigate(['/reset', 'request']);
     }
 }

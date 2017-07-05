@@ -15,6 +15,7 @@ export * from './tracker/tracker.service';
 export * from './login/login.component';
 export * from './login/login.service';
 export * from './login/login-modal.service';
+export * from './login/login.route';
 export * from './user/account.model';
 export * from './user/user.model';
 export * from './user/user.service';

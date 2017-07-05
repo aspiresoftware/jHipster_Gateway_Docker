@@ -1,5 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import {
@@ -15,13 +16,15 @@ import {
     Principal,
     JhiTrackerService,
     HasAnyAuthorityDirective,
-    JhiLoginModalComponent
+    JhiLoginModalComponent,
+    LOGIN_ROUTE
 } from './';
 
 @NgModule({
     imports: [
         DemoGatewaySharedLibsModule,
-        DemoGatewaySharedCommonModule
+        DemoGatewaySharedCommonModule,
+        RouterModule.forRoot([ LOGIN_ROUTE ], { useHash: true })
     ],
     declarations: [
         JhiLoginModalComponent,
